@@ -1,0 +1,9 @@
+/* ══════════════════════════════════════════════════════
+   ROFI MAIN CONFIG — ~/.config/rofi/config.rasi
+   ══════════════════════════════════════════════════════ */
+
+configuration {
+
+}
+
+@theme "~/.config/rofi/gruvbox-dark-hard.rasi"

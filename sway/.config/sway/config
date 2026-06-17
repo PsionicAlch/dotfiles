@@ -1,0 +1,258 @@
+# ╔══════════════════════════════════════════════════════╗
+# ║         SWAY CONFIG — GRUVBOX DARK HARD              ║
+# ║         Sidonia no Kishi rice                        ║
+# ╚══════════════════════════════════════════════════════╝
+
+# ── Gruvbox Dark Hard Palette ──────────────────────────
+# bg:      #1d2021   bg0_h
+# bg1:     #282828   bg0
+# bg2:     #3c3836   bg1
+# bg3:     #504945   bg2  (active workspace)
+# fg:      #ebdbb2   fg1
+# red:     #cc241d / #fb4934
+# green:   #98971a / #b8bb26
+# yellow:  #d79921 / #fabd2f
+# blue:    #458588 / #83a598
+# purple:  #b16286 / #d3869b
+# aqua:    #689d6a / #8ec07c
+# gray:    #a89984
+# orange:  #d65d0e / #fe8019
+
+# ── Variables ──────────────────────────────────────────
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+
+# Apps
+set $term kitty
+set $menu rofi -show drun -show-icons
+set $browser brave-browser
+set $filemanager thunar
+set $locker swaylock \
+    --image ~/.config/sway/wallpaper.jpg \
+    --scaling fill \
+    --color 1d2021 \
+    --inside-color 28282888 \
+    --inside-clear-color 98971a88 \
+    --inside-ver-color 45858888 \
+    --inside-wrong-color cc241d88 \
+    --ring-color ebdbb2 \
+    --ring-clear-color b8bb26 \
+    --ring-ver-color 83a598 \
+    --ring-wrong-color fb4934 \
+    --key-hl-color fabd2f \
+    --bs-hl-color fe8019 \
+    --text-color 00000000 \
+    --text-clear-color 00000000 \
+    --text-ver-color 00000000 \
+    --text-wrong-color 00000000 \
+    --line-color 00000000 \
+    --line-clear-color 00000000 \
+    --line-ver-color 00000000 \
+    --line-wrong-color 00000000 \
+    --separator-color 00000000
+
+# Gruvbox colors
+set $bg       #1d2021
+set $bg1      #282828
+set $bg2      #3c3836
+set $bg3      #504945
+set $fg       #ebdbb2
+set $fg2      #d5c4a1
+set $gray     #a89984
+set $red      #cc241d
+set $red_b    #fb4934
+set $green    #98971a
+set $green_b  #b8bb26
+set $yellow   #d79921
+set $yellow_b #fabd2f
+set $blue     #458588
+set $blue_b   #83a598
+set $purple   #b16286
+set $aqua     #689d6a
+set $orange   #d65d0e
+set $orange_b #fe8019
+
+# ── Output / Wallpaper ─────────────────────────────────
+output * bg ~/.config/sway/wallpaper.jpg fill
+
+# ── Input ──────────────────────────────────────────────
+input "type:keyboard" {
+    xkb_options caps:escape
+    repeat_delay 300
+    repeat_rate 50
+}
+
+input "type:touchpad" {
+    dwt enabled
+    tap enabled
+    tap_button_map lrm
+    natural_scroll enabled
+    middle_emulation enabled
+    scroll_method two_finger
+}
+
+seat seat0 xcursor_theme "Capitaine Cursors (Gruvbox)" 24
+
+# ── Idle & Lock ────────────────────────────────────────
+exec swayidle -w \
+    timeout 300 '$locker' \
+    timeout 600 'swaymsg "output * power off"' \
+    resume 'swaymsg "output * power on"' \
+    before-sleep '$locker'
+
+# ── Appearance ─────────────────────────────────────────
+# Gaps
+gaps inner 4
+gaps outer 4
+smart_gaps on
+
+# Borders
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders smart
+smart_borders on
+
+# Window colors:         border  background  text    indicator  child_border
+client.focused           $blue_b  $bg3        $fg     $yellow_b  $blue_b
+client.focused_inactive  $bg2     $bg2        $gray   $bg3       $bg2
+client.unfocused         $bg1     $bg1        $gray   $bg2       $bg1
+client.urgent            $red_b   $red        $fg     $red_b     $red_b
+
+# Font for window titles
+font pango:JetBrains Mono Nerd Font 10
+
+# ── Workspaces ─────────────────────────────────────────
+# 5 workspaces — cap enforced via no bindings beyond ws 5
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+
+# Switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+
+# ── Key Bindings ───────────────────────────────────────
+# Core
+bindsym $mod+Return      exec $term
+bindsym $mod+d           exec $menu
+bindsym $mod+Shift+q     kill
+bindsym $mod+Shift+c     reload
+bindsym $mod+Shift+e     exec swaynag -t warning -m 'Exit sway?' -B 'Yes' 'swaymsg exit'
+bindsym $mod+F1          exec $locker
+
+# App shortcuts
+bindsym $mod+b           exec $browser
+bindsym $mod+e           exec $filemanager
+bindsym $mod+s           exec flameshot gui
+
+# Focus (vim keys + arrows)
+bindsym $mod+$left       focus left
+bindsym $mod+$down       focus down
+bindsym $mod+$up         focus up
+bindsym $mod+$right      focus right
+bindsym $mod+Left        focus left
+bindsym $mod+Down        focus down
+bindsym $mod+Up          focus up
+bindsym $mod+Right       focus right
+
+# Move
+bindsym $mod+Shift+$left  move left
+bindsym $mod+Shift+$down  move down
+bindsym $mod+Shift+$up    move up
+bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+Left   move left
+bindsym $mod+Shift+Down   move down
+bindsym $mod+Shift+Up     move up
+bindsym $mod+Shift+Right  move right
+
+# Layout
+bindsym $mod+o           splith
+bindsym $mod+v           splitv
+bindsym $mod+f           fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space       focus mode_toggle
+bindsym $mod+a           focus parent
+bindsym $mod+minus       layout stacking
+bindsym $mod+w           layout tabbed
+bindsym $mod+t           layout toggle split
+
+# Resize mode
+mode "resize" {
+    bindsym $left  resize shrink width  10px
+    bindsym $down  resize grow   height 10px
+    bindsym $up    resize shrink height 10px
+    bindsym $right resize grow   width  10px
+
+    bindsym Left   resize shrink width  10px
+    bindsym Down   resize grow   height 10px
+    bindsym Up     resize shrink height 10px
+    bindsym Right  resize grow   width  10px
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+grave       scratchpad show
+
+# Volume (pipewire/wireplumber)
+bindsym XF86AudioRaiseVolume  exec wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume  exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioMute         exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86AudioMicMute      exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+# Brightness
+bindsym XF86MonBrightnessUp   exec brightnessctl set 10%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+
+# ── Floating Rules ─────────────────────────────────────
+for_window [window_role="pop-up"]         floating enable
+for_window [window_role="bubble"]         floating enable
+for_window [window_role="dialog"]         floating enable
+for_window [window_type="dialog"]         floating enable
+for_window [app_id="thunar"]              floating enable, resize set 900 600
+for_window [app_id="pavucontrol"]         floating enable, resize set 700 500
+for_window [title="Picture-in-Picture"]   floating enable, sticky enable
+
+# ── Autostart ──────────────────────────────────────────
+exec_always ~/.config/waybar/launch.sh
+exec dunst
+exec nm-applet --indicator
+exec blueman-applet
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec kanshi
+
+# Set GTK theme via gsettings (needs gtk-settings.ini approach too)
+exec_always {
+    gsettings set org.gnome.desktop.interface gtk-theme 'Gruvbox-Dark-Hard'
+    gsettings set org.gnome.desktop.interface icon-theme 'Gruvbox-Plus-Dark'
+    gsettings set org.gnome.desktop.interface cursor-theme 'Capitaine Cursors (Gruvbox)'
+    gsettings set org.gnome.desktop.interface font-name 'JetBrains Mono 11'
+}
+
+# ── Bar ────────────────────────────────────────────────
+# Using waybar — do not use sway's built-in bar
+bar {
+    swaybar_command waybar
+}
+
+# Include drop-ins (kanshi output configs, per-machine etc.)
+include /etc/sway/config.d/*
+include ~/.config/sway/config.d/*

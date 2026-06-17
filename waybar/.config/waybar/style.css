@@ -1,0 +1,181 @@
+/* ══════════════════════════════════════════════════════
+   WAYBAR STYLESHEET — GRUVBOX DARK HARD
+   bg0_h: #1d2021  bg0: #282828  bg1: #3c3836  bg2: #504945
+   fg1: #ebdbb2    fg2: #d5c4a1  gray: #a89984
+   red: #cc241d    green: #98971a  yellow: #d79921
+   blue: #458588   purple: #b16286  aqua: #689d6a
+   Bright variants suffix _b
+   ════════════════════════════════════════════════════ */
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrains Mono Nerd Font", "Font Awesome 6 Free", monospace;
+    font-size: 13px;
+    min-height: 0;
+    transition-property: background-color, color;
+    transition-duration: 0.15s;
+    box-shadow: none;
+}
+
+window#waybar {
+    background-color: #282828;
+    color: #ebdbb2;
+    border-bottom: 2px solid #282828;
+}
+
+/* ── Left ────────────────────────────────────────── */
+#workspaces {
+	padding: 0px;
+}
+
+#workspaces button {
+    background-color: #282828;
+    color: #ebdbb2;
+    padding: 0px;
+    border-bottom: 2px solid #282828;
+    font-size: 15px;
+    min-width: 36px;
+}
+
+#workspaces button * {
+    box-shadow: none;
+    background-color: inherit;
+}
+
+#workspaces button:hover {
+    background-color: #504945;
+    color: #ebdbb2;
+    border-bottom: 2px solid #504945;
+}
+
+#workspaces button.active {
+    background-color: #504945;
+    color: #ebdbb2;
+    border-bottom: 2px solid #504945;
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    background-color: #504945;
+    color: #ebdbb2;
+    border-bottom: 2px solid #504945;
+}
+
+/* ── Center ──────────────────────────────────────── */
+#clock {
+    color: #ebdbb2;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 0 16px;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #282828;
+}
+
+/* ── Right — shared pill/separator style ─────────── */
+#cpu,
+#memory,
+#temperature,
+#battery,
+#pulseaudio,
+#tray {
+    padding: 0 10px;
+    color: #ebdbb2;
+}
+
+#tray {
+    padding: 0 8px;
+}
+
+/* ── CPU ──────────────────────────────────────────── */
+#cpu {
+    color: #ebdbb2;
+}
+
+#cpu.warning {
+    color: #fabd2f;
+}
+
+#cpu.critical {
+    color: #fb4934;
+    font-weight: bold;
+}
+
+/* ── Memory ───────────────────────────────────────── */
+#memory {
+    color: #ebdbb2;
+}
+
+#memory.warning {
+    color: #fabd2f;
+}
+
+#memory.critical {
+    color: #fb4934;
+    font-weight: bold;
+}
+
+/* ── Temperature ──────────────────────────────────── */
+#temperature {
+    color: #ebdbb2;
+}
+
+#temperature.critical {
+    color: #fb4934;
+    animation: blink 1s step-end infinite;
+}
+
+/* ── Battery ──────────────────────────────────────── */
+#battery {
+    color: #ebdbb2;
+}
+
+#battery.charging {
+    color: #b8bb26;
+}
+
+#battery.warning:not(.charging) {
+    color: #fe8019;
+}
+
+#battery.critical:not(.charging) {
+    color: #fb4934;
+    animation: blink 0.5s step-end infinite;
+}
+
+/* ── Audio ────────────────────────────────────────── */
+#pulseaudio {
+    color: #ebdbb2;
+}
+
+#pulseaudio.muted {
+    color: #ebdbb2;
+}
+
+/* ── Tray ─────────────────────────────────────────── */
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    color: #cc241d;
+}
+
+/* ── Blink animation for critical states ──────────── */
+@keyframes blink {
+    to { color: #ebdbb2; }
+}
+
+/* ── Tooltip ──────────────────────────────────────── */
+tooltip {
+    background-color: #1d2021;
+    border: 1px solid #504945;
+    border-radius: 4px;
+    color: #ebdbb2;
+}
+
+tooltip label {
+    color: #ebdbb2;
+    font-size: 12px;
+}
