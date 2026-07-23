@@ -22,6 +22,7 @@ Managed with [GNU Stow](https://www.gnu.org/software/stow/).
 | `lazygit` | `~/.config/lazygit/config.yml` |
 | `fastfetch` | `~/.config/fastfetch/` |
 | `wallpaper` | `~/.config/sway/wallpaper.jpg` |
+| `zellij` | `~/.config/zellij` |
 
 GTK theming is **not** stowed — see [Theming gotchas](#theming-gotchas) below,
 it needs a few manual steps rather than a config file.
@@ -37,6 +38,15 @@ sudo dnf install sway waybar rofi dunst swayidle swaylock kitty \
     flameshot neovim tmux lazygit gcc fastfetch \
     blueman pavucontrol wl-clipboard polkit-gnome \
     lxappearance
+```
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+```bash
+cargo install --locked zellij && \
+cargo install cargo-update
 ```
 
 ### 2. JetBrains Mono Nerd Font
